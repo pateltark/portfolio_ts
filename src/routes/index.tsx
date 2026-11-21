@@ -161,9 +161,9 @@ function TerminalCard() {
   return (
     <div className="panel hidden overflow-hidden lg:block">
       <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-4 py-3">
-        <span className="size-2.5 rounded-full bg-border" />
-        <span className="size-2.5 rounded-full bg-border" />
-        <span className="size-2.5 rounded-full bg-border" />
+        <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+        <span className="size-2.5 rounded-full bg-[#febc2e]" />
+        <span className="size-2.5 rounded-full bg-[#28c840]" />
         <span className="ml-3 font-mono text-xs text-muted-foreground">pipeline</span>
       </div>
       <div className="space-y-2.5 p-6 font-mono text-sm">
