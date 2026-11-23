@@ -1,17 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Briefcase, Github, Linkedin, Mail, Send, Sparkles } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { Github, Linkedin, Mail, Send } from "lucide-react";
+import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { PROFILE } from "@/data/profile";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Tark Patel — AI Engineer" },
-      { name: "description", content: "Get in touch with Tark Patel about full-time AI engineering roles or freelance AI projects." },
+      { name: "description", content: "Get in touch with Tark Patel about full-time AI engineering roles." },
       { property: "og:title", content: "Contact Tark Patel" },
-      { property: "og:description", content: "Hiring or building with AI? Send a message." },
+      { property: "og:description", content: "Hiring an AI engineer? Send a message." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -19,22 +18,14 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const REASONS = [
-  { id: "job", label: "Job opportunity", icon: Briefcase },
-  { id: "project", label: "Freelance project", icon: Sparkles },
-] as const;
-
 const fieldClass =
   "w-full rounded-lg border border-input bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary";
 
 function ContactPage() {
-  const [reason, setReason] = useState<(typeof REASONS)[number]["id"]>("job");
-
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const label = REASONS.find((r) => r.id === reason)?.label ?? "";
-    const subject = `${label} — ${String(f.get("name") ?? "")}`;
+    const subject = `Job opportunity — ${String(f.get("name") ?? "")}`;
     const body = `${String(f.get("message") ?? "")}\n\n— ${String(f.get("name") ?? "")} (${String(f.get("email") ?? "")})`;
     window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -45,10 +36,10 @@ function ContactPage() {
         <div>
           <p className="eyebrow">contact</p>
           <h1 className="mt-3 text-4xl font-bold text-foreground sm:text-5xl">
-            Let's work together.
+            Let's talk.
           </h1>
           <p className="mt-5 max-w-md text-muted-foreground">
-            Recruiter, founder or team lead — tell me what you're working on and I'll get back within 24 hours.
+            Recruiter or hiring manager — tell me about the role and I'll get back within 24 hours.
           </p>
           <div className="mt-10 space-y-3">
             {[
@@ -65,24 +56,6 @@ function ContactPage() {
         </div>
 
         <form onSubmit={onSubmit} className="panel space-y-5 p-8">
-          <div>
-            <span className="eyebrow">I'm reaching out about</span>
-            <div className="mt-3 grid grid-cols-2 gap-3">
-              {REASONS.map((r) => (
-                <button
-                  type="button"
-                  key={r.id}
-                  onClick={() => setReason(r.id)}
-                  className={cn(
-                    "flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm transition",
-                    reason === r.id ? "border-primary bg-primary/5 text-primary" : "border-border text-muted-foreground hover:border-primary/50",
-                  )}
-                >
-                  <r.icon className="size-4" /> {r.label}
-                </button>
-              ))}
-            </div>
-          </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block space-y-2">
               <span className="text-sm text-muted-foreground">Name</span>
@@ -101,7 +74,7 @@ function ContactPage() {
               rows={6}
               maxLength={2000}
               className={fieldClass}
-              placeholder={reason === "job" ? "Role, team and what you're looking for…" : "What you want to build, timeline and budget…"}
+              placeholder="Role, team and what you're looking for…"
             />
           </label>
           <Button type="submit" variant="glow" size="xl" className="w-full">

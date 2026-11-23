@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Download, Sparkles } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/site/project-card";
 import { SectionHeading } from "@/components/site/section-heading";
 import { CATEGORY_META } from "@/components/site/category-icon";
 import { CATEGORIES, PROJECTS, countByCategory } from "@/data/projects";
-import { PROFILE, SERVICES } from "@/data/profile";
+import { PROFILE } from "@/data/profile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,13 +45,9 @@ function Home() {
                 Explore {PROJECTS.length} projects <ArrowRight />
               </Link>
             </Button>
-            {PROFILE.resumeUrl ? (
+            {PROFILE.resumeUrl && (
               <Button asChild variant="hollow" size="xl">
                 <a href={PROFILE.resumeUrl} target="_blank" rel="noreferrer"><Download /> Download resume</a>
-              </Button>
-            ) : (
-              <Button asChild variant="hollow" size="xl">
-                <Link to="/services"><Sparkles /> Hire me for a project</Link>
               </Button>
             )}
           </div>
@@ -113,33 +109,15 @@ function Home() {
         </div>
       </section>
 
-      {/* Services teaser */}
-      <section className="border-y border-border bg-secondary/50">
-        <div className="mx-auto max-w-6xl px-5 py-24">
-          <SectionHeading eyebrow="for teams & founders" title={<>Need AI built? Let's ship it.</>}>
-            I take on freelance projects alongside full-time opportunities.
-          </SectionHeading>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s, i) => (
-              <div key={s.title} className="bg-card p-7">
-                <span className="text-xs font-semibold text-primary">0{i + 1}</span>
-                <h3 className="mt-3 text-base font-semibold text-foreground">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-5 py-24">
         <div className="panel relative overflow-hidden bg-secondary/60 p-10 text-center sm:p-14">
           <p className="eyebrow">next step</p>
           <h2 className="mx-auto mt-4 max-w-2xl text-2xl font-semibold text-foreground sm:text-4xl">
-            Hiring or building something with AI?
+            Looking for an AI engineer?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-            Whether it's a full-time role or a project, I reply within 24 hours.
+            I'm open to full-time roles. I reply within 24 hours.
           </p>
           <Button asChild variant="glow" size="xl" className="mt-8">
             <Link to="/contact">Get in touch <ArrowRight /></Link>

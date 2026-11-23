@@ -7,7 +7,7 @@ import { PROFILE } from "@/data/profile";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
-  { to: "/services", label: "Services" },
+
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
